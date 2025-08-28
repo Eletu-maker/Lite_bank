@@ -38,4 +38,5 @@ build/
 .DS_Store
 .gitignore
 
-.secret.properties
+src/main/resources/secret.properties
+src/main/resources/application.properties
