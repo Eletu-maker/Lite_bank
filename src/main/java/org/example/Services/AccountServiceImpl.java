@@ -7,6 +7,7 @@ import org.example.DTO.Request.DepositRequest;
 import org.example.DTO.Respone.*;
 import org.example.DTO.TransactionStatus;
 import org.example.Exception.AccountNotFoundException;
+import org.example.Exception.UserAlreadyExist;
 import org.example.Model.Account;
 import org.example.Model.Transaction;
 import org.example.Model.TransactionType;
@@ -31,6 +32,7 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public CreateAccountResponse createAccount(CreateAccountRequest request) {
+        if (accountRepository.existsByUsername(request.getUsername()))throw new UserAlreadyExist("Username already exist");
         Account creatingAccount = createAccountFrom(request);
         Account creatingAccountNumber = createAccountNumber(creatingAccount);
         accountRepository.save(creatingAccountNumber);
